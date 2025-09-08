@@ -1,0 +1,31 @@
+.media-details {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    color: #fff;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.media-info {
+    max-width: 600px;
+    margin-left: 20px;
+}
+.back-button {
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+        background-color: #666;
+    }
+}

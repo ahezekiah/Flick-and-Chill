@@ -1,0 +1,29 @@
+.genres {
+    padding: 2rem;
+
+    h2 {
+        color: #fff;
+        margin-bottom: 1rem;
+    }
+
+    .genre-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 2rem;
+
+        button {
+            background-color: #444;
+            border: none;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+
+            &:hover {
+                background-color: #ff6600;
+            }
+        }
+    }
+}

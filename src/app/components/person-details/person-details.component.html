@@ -1,0 +1,9 @@
+<button (click)="goBack()" class="back-button">← Back</button>
+<h2>{{ personName }} Works</h2>
+<div class="card-grid">
+    <div *ngFor="let item of personCredits" class="card" (click)="goToMediaDetails(item)">
+      <img *ngIf="item.poster_path" [src]="'https://image.tmdb.org/t/p/w200' + item.poster_path" alt="{{ item.title || item.name }}">
+        <p>{{ item.title || item.name }}</p>
+        <p class="role">{{ item.character || item.job }}</p>
+    </div>
+</div>

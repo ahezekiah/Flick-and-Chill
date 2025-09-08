@@ -1,0 +1,14 @@
+<div class="genre-results">
+    <h2>{{ genreName }} - {{ type === 'movie' ? 'Movies' : 'TV Shows' }}</h2>
+
+    <button class="back-button" (click)="goBack()">← Back</button>
+
+    <div class="card-container">
+        <div class="media-card" *ngFor="let item of results" (click)="goToDetails(item)">
+            <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path"
+                alt="{{ item.title || item.name }} poster">
+            <h3>{{ item.title || item.name }}</h3>
+            <p>{{ item.overview }}</p>
+        </div>
+    </div>
+</div>

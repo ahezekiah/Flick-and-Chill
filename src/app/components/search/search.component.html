@@ -1,0 +1,55 @@
+<div class="search-container">
+<input 
+    type="text" 
+    [(ngModel)]="query" 
+    placeholder="Search for movies or TV shows..."
+    inputmode="search">
+    <button (click)="search()">🔍 Search</button>
+    
+
+</div>
+
+
+<div class="movies-grid">
+    <div class="movie-card" *ngFor="let movie of searchMovieResults" (click)="viewMovieDetails(movie.id)">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+        <div class="movie-info">
+            <h3>{{ movie.title }}</h3>
+            <p>⭐ {{ movie.vote_average }} / 10</p>
+        </div>
+    </div>
+</div>
+
+<div class="tvs-grid">
+    <div class="tv-card" *ngFor="let tv of searchTVResults" (click)="viewTVShowDetails(tv.id)">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + tv.poster_path" alt="{{ tv.name }}">
+        <div class="tv-info">
+            <h3>{{ tv.name }}</h3>
+            <p>⭐ {{ tv.vote_average }} / 10</p>
+        </div>
+    </div>
+</div>
+
+<h2>Recommended Movies</h2>
+<div class="movies-grid">
+    <div class="movie-card" *ngFor="let movie of recommendedMovies" (click)="viewMovieDetails(movie.id)">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="{{ movie.title }}">
+        <div class="movie-info">
+            <h3>{{ movie.title }}</h3>
+            <p>⭐ {{ movie.vote_average }} / 10</p>
+        </div>
+    </div>
+</div>
+
+<h2>Recommended TV Shows</h2>
+<div class="tvs-grid">
+    <div class="tv-card" *ngFor="let tv of recommendedTVShows" (click)="viewTVShowDetails(tv.id)">
+        <img [src]="'https://image.tmdb.org/t/p/w500' + tv.poster_path" alt="{{ tv.name }}">
+        <div class="tv-info">
+            <h3>{{ tv.name }}</h3>
+            <p>⭐ {{ tv.vote_average }} / 10</p>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,29 @@
+<button (click)="goBack()" class="back-button">← Back</button>
+<div class="tv-details" *ngIf="tv">
+    <img [src]="'https://image.tmdb.org/t/p/w500' + tv.poster_path" alt="{{ tv.name }}" class="tv-poster">
+    <div class="tv-info">
+        <h2>{{ tv.name }}</h2>
+        <p><strong>First Air Date:</strong> {{ tv.first_air_date }}</p>
+        <p><strong>Genres:</strong> {{ genres }}</p>
+        <p><strong>Rating:</strong> ⭐ {{ tv.vote_average }} / 10</p>
+        <p><strong>Overview:</strong> {{ tv.overview }}</p>
+        <p><strong>Number of Seasons:</strong> {{ tv.number_of_seasons }}</p>
+        <p><strong>Number of Episodes:</strong> {{ tv.number_of_episodes }}</p>
+        <h3>Seasons</h3>
+        <ul>
+            <li *ngFor="let season of tv.seasons">{{ season.name }} ({{ season.episode_count }} episodes)</li>
+        </ul>
+        <h3>Cast</h3>
+            <ul>
+                <li *ngFor="let member of cast">{{ member.name }} as {{ member.character }}</li>
+            </ul>
+        <h3>Crew</h3>
+            <ul>
+                <li *ngFor="let crewMember of crew">{{ crewMember.name }} - {{ crewMember.job }}</li>
+            </ul>
+    </div>
+    <div *ngIf="trailerUrl">
+        <h3>Watch Trailer</h3>
+        <iframe width="560" height="315" [src]="trailerUrl | safe" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>

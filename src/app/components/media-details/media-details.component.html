@@ -1,0 +1,23 @@
+<button (click)="goBack()" class="back-button">← Back</button>
+<div class="media-details" *ngIf="media">
+    <img *ngIf="media.poster_path" [src]="'https://image.tmdb.org/t/p/w300' + media.poster_path"
+        alt="{{ media.title || media.name }}">
+    <div class="media-info">
+        <h2>{{ media.title || media.name }}</h2>
+        <p><strong>Rating:</strong> ⭐ {{ media.vote_average }} / 10</p>
+        <p><strong>Genres:</strong> {{ genres }}</p>
+        <p><strong>Overview:</strong> {{ media.overview }}</p>
+        <p><strong>Release Date:</strong> {{ media.release_date || media.first_air_date }}</p>
+        <div *ngIf="tvEpisodes.length">
+            <h3>Episodes</h3>
+            <ul>
+                <li *ngFor="let ep of tvEpisodes">{{ ep.name }} ({{ ep.episode_number }})</li>
+            </ul>
+        </div>
+    </div>
+    <div *ngIf="trailerUrl">
+        <h3>Trailer</h3>
+        <iframe width="560" height="315" [src]="trailerUrl | safe" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+

@@ -1,0 +1,13 @@
+<div class="tv-list">
+    <h2>Trending TV Shows</h2>
+    <div class="tvs-grid">
+        <div class="tv-card" *ngFor="let tv of tvShows" (click)="viewDetails(tv.id)">
+            <img [src]="'https://image.tmdb.org/t/p/w500' + tv.poster_path" alt="{{ tv.name }}">
+        <div class="tv-info">
+            <h3>{{ tv.name }}</h3>
+            <p>⭐ {{ tv.vote_average }} / 10</p>
+        </div>
+    </div>
+    </div>
+</div>
+

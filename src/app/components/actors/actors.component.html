@@ -1,0 +1,8 @@
+<h2>Popular Actors</h2>
+<div class="card-grid">
+    <div *ngFor="let actor of actors" class="card" (click)="goToPerson(actor.id)">
+        <img [src]="'https://image.tmdb.org/t/p/w200' + actor.profile_path" alt="{{ actor.name }}">
+        <p>{{ actor.name }}</p>
+    </div>
+</div>
+

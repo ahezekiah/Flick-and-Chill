@@ -1,0 +1,33 @@
+<div class="trailers-page">
+    <h2>🎬 Movie & TV Show Trailers</h2>
+  
+    <!-- Movie Trailers Section -->
+    <div *ngIf="movieTrailers.length > 0">
+      <h3>🎥 Movie Trailers</h3>
+      <div class="trailer-container">
+        <div *ngFor="let trailer of movieTrailers" class="trailer">
+          <iframe width="560" height="315" 
+            [src]="'https://www.youtube.com/embed/' + trailer.key | safe" 
+            frameborder="0" allowfullscreen>
+          </iframe>
+          <p>{{ trailer.name }}</p>
+        </div>
+      </div>
+    </div>
+  
+    <!-- TV Show Trailers Section -->
+    <div *ngIf="tvTrailers.length > 0">
+      <h3>📺 TV Show Trailers</h3>
+      <div class="trailer-container">
+        <div *ngFor="let trailer of tvTrailers" class="trailer">
+          <iframe width="560" height="315" 
+            [src]="'https://www.youtube.com/embed/' + trailer.key | safe" 
+            frameborder="0" allowfullscreen>
+          </iframe>
+          <p>{{ trailer.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
