@@ -48,6 +48,7 @@ export class MovieDetailsComponent implements OnInit {
       });
     }
       this.getMovieTrailer(movieId); // ✅ Fetch trailer
+      this.getMovieWatchProviders(movieId); // ✅ Fetch watch providers
     }
 
     switchTab(tab: string) {

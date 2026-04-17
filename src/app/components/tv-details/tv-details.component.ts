@@ -48,6 +48,7 @@ export class TvDetailsComponent implements OnInit {
         }
       });
       this.getTVShowTrailer(tvId);
+      this.getTVWatchProviders(tvId);
     }
   }
 
