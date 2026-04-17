@@ -7,6 +7,64 @@
         <p><strong>Genres:</strong> {{ genres }}</p>
         <p><strong>Rating:</strong> ⭐ {{ movie.vote_average }} / 10</p>
         <p><strong>Overview:</strong> {{ movie.overview }}</p>
+
+  <div class="watch-section">
+  <h3>Where to Stream</h3>
+
+  <div *ngIf="streamingProviders.length > 0; else noStreamingProviders" class="provider-group">
+    <h4>Stream</h4>
+    <div class="provider-list">
+      <div class="provider-card" *ngFor="let provider of streamingProviders">
+        <a [href]="providerLink" target="_blank" rel="noopener noreferrer">
+          <img
+            [src]="'https://image.tmdb.org/t/p/w92' + provider.logo_path"
+            [alt]="provider.provider_name"
+          >
+        </a>
+        <span>{{ provider.provider_name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noStreamingProviders>
+    <p>No streaming providers listed right now.</p>
+  </ng-template>
+
+  <div *ngIf="rentProviders.length > 0" class="provider-group">
+    <h4>Rent</h4>
+    <div class="provider-list">
+      <div class="provider-card" *ngFor="let provider of rentProviders">
+        <a [href]="providerLink" target="_blank" rel="noopener noreferrer">
+          <img
+            [src]="'https://image.tmdb.org/t/p/w92' + provider.logo_path"
+            [alt]="provider.provider_name"
+          >
+        </a>
+        <span>{{ provider.provider_name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="buyProviders.length > 0" class="provider-group">
+    <h4>Buy</h4>
+    <div class="provider-list">
+      <div class="provider-card" *ngFor="let provider of buyProviders">
+        <a [href]="providerLink" target="_blank" rel="noopener noreferrer">
+          <img
+            [src]="'https://image.tmdb.org/t/p/w92' + provider.logo_path"
+            [alt]="provider.provider_name"
+          >
+        </a>
+        <span>{{ provider.provider_name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <a *ngIf="providerLink" [href]="providerLink" target="_blank" rel="noopener noreferrer" class="provider-link">
+    View all watch options
+  </a>
+</div>     
+
         <h3>Cast</h3>
             <ul>
                 <li *ngFor="let member of cast">{{ member.name }} as {{ member.character }}</li>
@@ -16,60 +74,7 @@
                 <li *ngFor="let crewMember of crew">{{ crewMember.name }} - {{ crewMember.job }}</li>
             </ul>
 
-        <div class="watch-section">
-        <h3>Where to Stream</h3>
-
-        <p *ngIf="providerRegion" class="provider-region">
-            Showing providers for {{ providerRegion }}
-        </p>
-
-        <div *ngIf="streamingProviders.length > 0; else noStreamingProviders" class="provider-group">
-            <h4>Stream</h4>
-            <div class="provider-list">
-            <div class="provider-card" *ngFor="let provider of streamingProviders">
-                <img
-                [src]="'https://image.tmdb.org/t/p/w92' + provider.logo_path"
-                [alt]="provider.provider_name"
-                >
-                <span>{{ provider.provider_name }}</span>
-            </div>
-            </div>
-        </div>
-
-        <ng-template #noStreamingProviders>
-            <p>No streaming providers listed right now.</p>
-        </ng-template>
-
-        <div *ngIf="rentProviders.length > 0" class="provider-group">
-            <h4>Rent</h4>
-            <div class="provider-list">
-            <div class="provider-card" *ngFor="let provider of rentProviders">
-                <img
-                [src]="'https://image.tmdb.org/t/p/w92' + provider.logo_path"
-                [alt]="provider.provider_name"
-                >
-                <span>{{ provider.provider_name }}</span>
-            </div>
-            </div>
-        </div>
-
-        <div *ngIf="buyProviders.length > 0" class="provider-group">
-            <h4>Buy</h4>
-            <div class="provider-list">
-            <div class="provider-card" *ngFor="let provider of buyProviders">
-                <img
-                [src]="'https://image.tmdb.org/t/p/w92' + provider.logo_path"
-                [alt]="provider.provider_name"
-                >
-                <span>{{ provider.provider_name }}</span>
-            </div>
-            </div>
-        </div>
-
-        <a *ngIf="providerLink" [href]="providerLink" target="_blank" rel="noopener noreferrer" class="provider-link">
-            View all watch options
-        </a>
-        </div>        
+        
     </div>
     <div *ngIf="trailerUrl">
         <h3>Watch Trailer</h3>

@@ -66,23 +66,33 @@ export class TvDetailsComponent implements OnInit {
   
   getTVWatchProviders(tvId: string) {
     this.tvService.getTVWatchProviders(tvId).subscribe((data: any) => {
-      const results = data?.results ?? {};
-      const preferredRegion = results['US'] || results['CA'] || results['GB'];
-      const fallbackRegionCode = Object.keys(results)[0];
-      const fallbackRegion = fallbackRegionCode ? results[fallbackRegionCode] : null;
-      const providerData = preferredRegion || fallbackRegion;
+      console.log('tvId:', tvId);
+      console.log('WATCH PROVIDERS RESPONSE:', data);
 
-      this.providerRegion = preferredRegion
-        ? (results['US'] ? 'US' : results['CA'] ? 'CA' : 'GB')
-        : fallbackRegionCode || '';
+      const results = data?.results || {};
+      console.log('AVAILABLE REGIONS:', Object.keys(results));
 
-      this.streamingProviders = providerData?.flatrate ?? [];
-      this.rentProviders = providerData?.rent ?? [];
-      this.buyProviders = providerData?.buy ?? [];
-      this.providerLink = providerData?.link ?? '';
+      const providers =
+        results['US'] ||
+        results['CA'] ||
+        results['GB'] ||
+        Object.values(results)[0];
+
+      if (!providers) {
+        console.log('No TV providers found');
+        this.streamingProviders = [];
+        this.rentProviders = [];
+        this.buyProviders = [];
+        this.providerLink = '';
+        return;
+      }
+
+      this.streamingProviders = (providers as any).flatrate || [];
+      this.rentProviders = (providers as any).rent || [];
+      this.buyProviders = (providers as any).buy || [];
+      this.providerLink = (providers as any).link || '';
     });
   }
-
   selectSeason(seasonNumber: number) {
     const tvId = this.route.snapshot.paramMap.get('id');
     if (tvId) {

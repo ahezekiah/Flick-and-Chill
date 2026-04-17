@@ -79,23 +79,34 @@ export class MovieDetailsComponent implements OnInit {
     }
     
   getMovieWatchProviders(movieId: string) {
-    this.movieService.getMovieWatchProviders(movieId).subscribe((data: any) => {
-      const results = data?.results ?? {};
-      const preferredRegion = results['US'] || results['CA'] || results['GB'];
-      const fallbackRegionCode = Object.keys(results)[0];
-      const fallbackRegion = fallbackRegionCode ? results[fallbackRegionCode] : null;
-      const providerData = preferredRegion || fallbackRegion;
+  this.movieService.getMovieWatchProviders(movieId).subscribe((data: any) => {
+    console.log('movieId:', movieId);
+    console.log('MOVIE WATCH PROVIDERS RESPONSE:', data);
 
-      this.providerRegion = preferredRegion
-        ? (results['US'] ? 'US' : results['CA'] ? 'CA' : 'GB')
-        : fallbackRegionCode || '';
+    const results = data?.results || {};
+    console.log('AVAILABLE MOVIE REGIONS:', Object.keys(results));
 
-      this.streamingProviders = providerData?.flatrate ?? [];
-      this.rentProviders = providerData?.rent ?? [];
-      this.buyProviders = providerData?.buy ?? [];
-      this.providerLink = providerData?.link ?? '';
-    });
-  }
+    const providers =
+      results['US'] ||
+      results['CA'] ||
+      results['GB'] ||
+      Object.values(results)[0];
+
+    if (!providers) {
+      console.log('No movie providers found');
+      this.streamingProviders = [];
+      this.rentProviders = [];
+      this.buyProviders = [];
+      this.providerLink = '';
+      return;
+    }
+
+    this.streamingProviders = (providers as any).flatrate || [];
+    this.rentProviders = (providers as any).rent || [];
+    this.buyProviders = (providers as any).buy || [];
+    this.providerLink = (providers as any).link || '';
+  });
+}
 
     goBack() {
       this.location.back();

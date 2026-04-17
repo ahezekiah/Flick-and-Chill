@@ -86,6 +86,8 @@ export class TvService {
     return this.http.get(`${this.API_URL}/person/${id}?api_key=${this.API_KEY}`);
   }
   getTVWatchProviders(tvId: string): Observable<any> {
-    return this.http.get(`${this.API_URL}/tv/${tvId}/watch/providers?api_key=${this.API_KEY}`);
+    return this.http.get(
+      `${this.API_URL}/tv/${tvId}/watch/providers?api_key=${this.API_KEY}`
+    );
   }
 }
