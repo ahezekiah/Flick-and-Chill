@@ -20,6 +20,12 @@ export class MovieDetailsComponent implements OnInit {
   movieTrailers: string[] = [];
   selectedTab: string = 'details';
 
+  streamingProviders: any[] = [];
+  rentProviders: any[] = [];
+  buyProviders: any[] = [];
+  providerRegion: string = '';
+  providerLink: string = '';
+
   constructor(private route: ActivatedRoute, private movieService: MovieService, private location: Location) {}
 
   ngOnInit(): void {
@@ -72,6 +78,25 @@ export class MovieDetailsComponent implements OnInit {
       this.getMovieTrailers();
     }
     
+  getMovieWatchProviders(movieId: string) {
+    this.movieService.getMovieWatchProviders(movieId).subscribe((data: any) => {
+      const results = data?.results ?? {};
+      const preferredRegion = results['US'] || results['CA'] || results['GB'];
+      const fallbackRegionCode = Object.keys(results)[0];
+      const fallbackRegion = fallbackRegionCode ? results[fallbackRegionCode] : null;
+      const providerData = preferredRegion || fallbackRegion;
+
+      this.providerRegion = preferredRegion
+        ? (results['US'] ? 'US' : results['CA'] ? 'CA' : 'GB')
+        : fallbackRegionCode || '';
+
+      this.streamingProviders = providerData?.flatrate ?? [];
+      this.rentProviders = providerData?.rent ?? [];
+      this.buyProviders = providerData?.buy ?? [];
+      this.providerLink = providerData?.link ?? '';
+    });
+  }
+
     goBack() {
       this.location.back();
     }

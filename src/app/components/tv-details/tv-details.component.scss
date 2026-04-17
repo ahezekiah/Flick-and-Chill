@@ -11,6 +11,50 @@
 .tv-info {
     max-width: 600px;
 }
+.watch-section {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.provider-region {
+  margin-top: -0.5rem;
+  opacity: 0.8;
+}
+
+.provider-group {
+  margin-top: 1rem;
+}
+
+.provider-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.provider-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  width: 88px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.provider-card img {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.provider-link {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
 .back-button {
     margin: 1rem;
     padding: 0.5rem 1rem;

@@ -74,6 +74,9 @@ export class MovieService {
     return this.http.get(`${this.API_URL}/genre/movie/list?api_key=${this.API_KEY}`);
   }
   
+  getMovieWatchProviders(movieId: string): Observable<any> {
+    return this.http.get(`${this.API_URL}/movie/${movieId}/watch/providers?api_key=${this.API_KEY}`);
+  }
 }
 
 

@@ -21,6 +21,12 @@ export class TvDetailsComponent implements OnInit {
   crew: any[] = [];
   genres: string = ''; // ✅ Store genres as a string
 
+  streamingProviders: any[] = [];
+  rentProviders: any[] = [];
+  buyProviders: any[] = [];
+  providerRegion: string = '';
+  providerLink: string = '';
+
   constructor(private route: ActivatedRoute, private tvService: TvService, private location: Location) {}
 
   ngOnInit() {
@@ -58,6 +64,25 @@ export class TvDetailsComponent implements OnInit {
     });
   }
   
+  getTVWatchProviders(tvId: string) {
+    this.tvService.getTVWatchProviders(tvId).subscribe((data: any) => {
+      const results = data?.results ?? {};
+      const preferredRegion = results['US'] || results['CA'] || results['GB'];
+      const fallbackRegionCode = Object.keys(results)[0];
+      const fallbackRegion = fallbackRegionCode ? results[fallbackRegionCode] : null;
+      const providerData = preferredRegion || fallbackRegion;
+
+      this.providerRegion = preferredRegion
+        ? (results['US'] ? 'US' : results['CA'] ? 'CA' : 'GB')
+        : fallbackRegionCode || '';
+
+      this.streamingProviders = providerData?.flatrate ?? [];
+      this.rentProviders = providerData?.rent ?? [];
+      this.buyProviders = providerData?.buy ?? [];
+      this.providerLink = providerData?.link ?? '';
+    });
+  }
+
   selectSeason(seasonNumber: number) {
     const tvId = this.route.snapshot.paramMap.get('id');
     if (tvId) {
